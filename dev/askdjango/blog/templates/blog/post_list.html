@@ -1,30 +1,24 @@
-<!doctype html>
-<html>
-<head>
-	<meta charset="utf-8" />
-	<title>AskDjango 블로그</title>
-</head>
+{% extends "blog/layout.html" %} <!-- 상속은 반드시 코드의 최상단에 작성해야 한다. -->
 
-<body>
+<!--
+부모 템플릿: blog/layout.html (중복으로 쓰이는 내용을 정의함)
+자식 템플릿: blog/post_list.html (중복되는 코드는 부모 템플릿의 내용을 상속받기 때문에 중복 배제됨)
+-->
 
-<h1>AskDjango</h1>
-<p>안녕하세요. 여러분의 파이썬/장고 페이스메이커가 되겠습니다.</p>
+{% block content %}
+	<form action="" method="get">
+		<input type="text" name="query" value="{{ query }}" /> <!-- 중괄호 두 개 사이에 변수 값은 띄워써야 가독성이 좋다. -->
+		<input type="submit" value="검색" />
+	</form>
 
-<form action="" method="get">
-	<input type="text" name="query" value="{{ query }}" /> <!-- 중괄호 두 개 사이에 변수 값은 띄워써야 가독성이 좋다. -->
-	<input type="submit" value="검색" />
-</form>
-
-<ul> <!-- ul은 Unordered List의 약자이다. 순서가 필요없는 목록을 생성함. -->
-{% for post in post_list %}	<!-- {%는 django function을 사용하겠다는 의미이다. -->
-	<li> <!-- li는 List Item의 약자이다. <ol>과 <ul>의 각 항목들을 나열할 때 <li> 태그를 사용함.-->
-		{{ post.pk }}
-		<a href="/blog/{{ post.pk }}/">
-			{{ post.title }}
-		</a>
-	</li>
-{% endfor %}
-</ul>
-
-</body>
-</html>
+	<ul> <!-- ul은 Unordered List의 약자이다. 순서가 필요없는 목록을 생성함. -->
+	{% for post in post_list %}	<!-- {%는 django function을 사용하겠다는 의미이다. -->
+		<li> <!-- li는 List Item의 약자이다. <ol>과 <ul>의 각 항목들을 나열할 때 <li> 태그를 사용함.-->
+			{{ post.pk }}
+			<a href="/blog/{{ post.pk }}/">
+				{{ post.title }}
+			</a>
+		</li>
+	{% endfor %}
+	</ul>
+{% endblock %}
