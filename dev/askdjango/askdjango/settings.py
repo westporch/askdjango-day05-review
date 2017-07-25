@@ -57,8 +57,10 @@ ROOT_URLCONF = 'askdjango.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-			os.path.join(BASE_DIR, 'askdjango', 'templates'),
+       'DIRS': [
+			# 프로젝트 전반적으로 쓰일 템플릿 파일은 "특정앱/templates/" 경로가 아닌 별도의 경로에 저장하면 좋음
+			# filesystem.Loader에 설정된 템플릿 경로에서 템플릿 파일을 찾는다.
+			os.path.join(BASE_DIR, 'askdjango', 'templates'),	# askdajngo는 프로젝트 이름이다.
 		],
         'APP_DIRS': True,
         'OPTIONS': {
