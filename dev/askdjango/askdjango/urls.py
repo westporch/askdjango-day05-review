@@ -20,7 +20,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-	url(r'^weblog/', include('blog.urls')),
+	url(r'^weblog/', include('blog.urls', namespace='blog')), # url(r'^weblog/', include('blog.urls'), namespace='blog'),으로 작성하면 안된다. include 안에 namespace를 작성해야 한다. 
 ]
 
 
