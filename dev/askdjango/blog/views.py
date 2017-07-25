@@ -1,3 +1,4 @@
+import datetime
 from django.db.models import Q 
 ''' 예를 들어 OR 구문을 포함한 복잡한 쿼리를 실행하고자 할 때 Q object를 사용한다. 
 참고: https://docs.djangoproject.com/en/1.11/topics/db/queries/#complex-lookups-with-q-objects
@@ -24,7 +25,16 @@ def post_list(request):
 		condition = Q(title__icontains=query) | Q(content__icontains=query)
 		qs = qs.filter(condition)
 
-	return render(request, 'blog/post_list.html', {'post_list': qs, 'query': query, }) # post_list를 qs에 저장함, 'post_list'는 템플릿 변수.
+	date_list = []
+	for i in range(365):
+		date = datetime.datetime(2017, 1, 1) + datetime.timedelta(days=i)
+		date_list.append(date)
+
+	return render(request, 'blog/post_list.html', {
+		'post_list': qs, # post_list를 qs에 저장함, 'post_list'는 템플릿 변수.
+		'query': query, 
+		'date_list': date_list,
+	})
 
 def post_detail(request, pk):
 	# pk = "100"	# 숫자가 아닌 문자열 100이다.

@@ -21,4 +21,14 @@
 		</li>
 	{% endfor %}
 	</ul>
+
+	<hr/>
+
+	{% for current_date in date_list %}
+		{% ifchanged %}
+			<h3>{{ current_date|date:"M" }}</h3> 
+		{% endifchanged %}
+		{{ current_date }}<br/>
+	{% endfor %}
+
 {% endblock %}
