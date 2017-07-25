@@ -15,7 +15,7 @@
 	{% for post in post_list %}	<!-- {%는 django function을 사용하겠다는 의미이다. -->
 		<li> <!-- li는 List Item의 약자이다. <ol>과 <ul>의 각 항목들을 나열할 때 <li> 태그를 사용함.-->
 			{{ post.pk }}
-			<a href="/blog/{{ post.pk }}/">
+			<a href="{% url "post_detail" post.pk %}">
 				{{ post.title }}
 			</a>
 			<small>({{ post.created_at|timesince }})</small>
