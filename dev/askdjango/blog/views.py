@@ -26,6 +26,13 @@ def post_list(request):
 
 	return render(request, 'blog/post_list.html', {'post_list': qs, 'query': query, }) # post_list를 qs에 저장함, 'post_list'는 템플릿 변수.
 
+def post_detail(request, pk):
+	# pk = "100"	# 숫자가 아닌 문자열 100이다.
+	post = Post.objects.get(pk=pk) # post = Post.objects.get(pk=int(pk))처럼 굳이 문자열을 정수로 변환하지 않아도 된다.
+	return render(request, 'blog/post_detail.html', {
+		'post': post,
+	})
+
 def post_list1(request):
 	'FBV: 직접 문자열로 HTML형식 응답하기'
 
